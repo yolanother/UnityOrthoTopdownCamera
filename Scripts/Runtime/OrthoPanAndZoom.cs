@@ -17,6 +17,7 @@ namespace DoubTech.OrthoTopdownCamera
         [SerializeField] private float touchPanSpeed = 1;
 
         [Header("Mouse")]
+        [SerializeField] private bool flipMouseScroll = false;
         [SerializeField] private float mousePanSpeed = 1f;
         [SerializeField] private float mouseScrollSpeed = 1f;
 
@@ -80,7 +81,7 @@ namespace DoubTech.OrthoTopdownCamera
         private void MouseZoom(InputAction.CallbackContext ctx)
         {
             var scroll = ctx.ReadValue<float>() * mouseScrollSpeed / 1000f;
-            Zoom += scroll;
+            Zoom -= (flipMouseScroll ? -1 : 1) * scroll;
             Debug.Log("Scroll: " + scroll);
         }
 
